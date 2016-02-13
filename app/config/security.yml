@@ -1,0 +1,54 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface:
+            algorithm: bcrypt
+            cost: 13
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_manager
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        adminstration:
+            pattern:            /admin/(.*)
+            switch_user:        true
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     sfs_admin_login
+                use_forward:    false
+                check_path:     sfs_admin_login_check
+                failure_path:   null
+                default_target_path: sfs_admin_dashboard
+            logout:
+                path:   sfs_admin_logout
+                target: sfs_admin_login
+                invalidate_session: false
+            anonymous:          true
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    access_control:
+        # URL of admin which need to be available to anonymous users
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+        - { path: ^/admin/, role: ROLE_ADMIN }

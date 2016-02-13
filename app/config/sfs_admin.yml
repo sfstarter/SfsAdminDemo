@@ -1,0 +1,9 @@
+sfs_admin:
+    title_text: SfsAdmin Demo
+    menu_categories:
+        - { name: Contents, icon: fa-folder }
+        - { name: Users, icon: fa-group }
+    topbar_buttons:
+        - { title: GitHub, icon: fa-github, url: https://github.com/sfstarter/SfsAdminBundle }
+        - { title: Documentation, icon: fa-book, url: http://sfsadmin.solidlynx.com }
+        - { title: Template, icon: fa-tv, url: http://sfsadmintemplate.solidlynx.com }

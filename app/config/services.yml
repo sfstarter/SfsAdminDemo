@@ -1,0 +1,25 @@
+services:
+    sfs_admin.user:
+        class: UserBundle\Admin\UserAdmin
+        tags:
+            - { name: sfs_admin.resource, title: "Users", slug: "user", category: "Users", icon: "fa-user" }
+        arguments:
+            - UserBundle\Entity\User
+    sfs_admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sfs_admin.resource, title: "Categories", slug: "category", category: "Contents", icon: "fa-th" }
+        arguments:
+            - AppBundle\Entity\Category
+    sfs_admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        tags:
+            - { name: sfs_admin.resource, title: "Products", slug: "product", category: "Contents", icon: "fa-cube" }
+        arguments:
+            - AppBundle\Entity\Product
+    sfs_admin.cart:
+        class: AppBundle\Admin\CartAdmin
+        tags:
+            - { name: sfs_admin.resource, title: "Carts", slug: "cart", category: "Contents", icon: "fa-shopping-cart" }
+        arguments:
+            - AppBundle\Entity\Cart
